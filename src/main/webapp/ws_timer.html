@@ -503,7 +503,7 @@ window.onload = function() {
 
 
     function connect(event) {
-        socket = new SockJS('http://localhost/ws');
+        socket = new SockJS('/ws');
         stompClient = Stomp.over(socket);
         stompClient.connect({}, onConnected, onError);
     }
@@ -578,7 +578,7 @@ window.onload = function() {
 
    $("#button_getdata").click(function(){
           $.ajax({
-               url: 'http://localhost/getdata',
+               url: '/getdata',
                method: 'post',
                dataType: 'json',
                contentType: "application/json",
