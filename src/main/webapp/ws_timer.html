@@ -1,0 +1,600 @@
+<html>
+
+<!--TEST PAGE DATABASE-->
+
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <link href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" rel="stylesheet">
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+
+
+<style>
+
+
+
+/************** MODAL ****************/
+
+/* Фон за формой */
+.modal {
+    //display: none;
+    position: fixed;
+    z-index: 150;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+}
+
+
+/* Содержание модального окна*/
+.modal-content {
+    overflow: hidden;
+    position: relative;
+    top: 50%; left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    user-select: none;
+    background-color: #fefefe;
+
+    border-radius: 14px;
+    width: 50%;
+    min-width: 700px;
+    height: 70%;
+    //box-shadow: 5px 10px 5px #666;
+    font-family: Poppins;
+}
+
+
+
+.up {
+    position: relative;
+    height: 40%;
+    width: 100%;
+    overflow: hidden;
+}
+
+
+.modal-content:hover .up_image {
+    transform: scale(1.2);
+}
+
+
+.up_text {
+    position: absolute;
+    top: 50%; left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    font-size: 30px;
+    font-weight: 900;
+    color: white;
+}
+
+
+.up_image {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: 1s;
+}
+
+.up_image_motor {
+    /*style="background-image: url(https://i.ibb.co/WPT6q2f/motor.png)"*/
+    background-image: url(https://i.ibb.co/WPT6q2f/motor.png);
+}
+
+.up_image_tool {
+    /*style="background-image: url(https://i.ibb.co/xXpHmwp/tools.png);"*/
+    background-image: url(https://i.ibb.co/xXpHmwp/tools.png);
+}
+
+.up_image_user {
+    background-image: url(https://i.ibb.co/FWbdBnt/user.png);
+    background-position: bottom;
+}
+
+.up_image_login {
+    background-image: url(https://i.ibb.co/k1WDzXV/sec.png);
+    /*background-image: url(https://i.ibb.co/1d48mh7/sec1.png);*/
+    /*background-image: url(https://i.ibb.co/f087Vs4/secure.png);*/
+}
+
+
+.close_form {
+    position: relative;
+    float: right;
+    margin: 20px 20px 0 0;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.close_form:hover .fa-times-circle {
+    transform: rotate(180deg);
+}
+
+.fa-times-circle {
+    transition: transform .4s;
+}
+
+
+
+
+.down {
+    margin: 20px 60px 40px 50px;
+    //background: green;
+}
+
+.down label {
+    float: right;
+    margin: 15px 0 0 0;
+    text-align: right;
+    color: #808080;
+    width: 100%;
+    //background: yellow;
+}
+
+.down .label_critical {
+    margin: 5px 0 7px 0;
+    //background: red;
+}
+
+
+#critical_value {
+    color: #01A794;
+    pointer-events: none;
+}
+
+.down input {
+    height: 45px;
+    width: 70%;
+    padding-left: 20px;
+    margin: 0 0 0 30px;
+	outline: none;
+	border: none;
+	border-bottom: 1px solid #808080;
+	font-family: Poppins;
+    font-size: 16px;
+    color: #505050;
+}
+
+
+input::-webkit-input-placeholder {
+    color: #999999;
+}
+
+input:focus::-webkit-input-placeholder {
+    color: transparent;
+}
+
+input:focus {
+    border-bottom: 1px solid #01A794;
+}
+
+
+.select_tool {
+	font-family: Poppins;
+    font-size: 16px;
+    color: #505050;
+    text-align: left;
+    width: 70%;
+    margin: 0 0 0 30px;
+    padding-left: 20px;
+    height: 45px;
+    border-radius: 5px;
+}
+
+
+.button_form {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    //top: 10px;
+
+    padding: 0 30px 0;
+    margin: 0 10px;
+    //min-width: 50px;
+    height: 50px;
+    background-color: #01A794;
+    border-radius: 25px;
+    border: none;
+    font-family: Poppins;
+    font-size: 16px;
+    color: #fff;
+    transition: all 0.4s;
+}
+
+#button_set_critical {
+    top: 15px;
+}
+
+.button_form:hover {
+    background-color: #333333;
+}
+
+/************** END MODAL ****************/
+
+
+
+
+/************** MENU ****************/
+
+.menu {
+    z-index: 100;
+    background-color: #48cfad;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    font-family: Poppins;
+    font-size: 15px;
+    /*box-shadow: 0 2px 14px;*/
+}
+
+
+
+.item {
+    float: left;
+    position: relative;
+}
+
+
+.item:hover {
+    background: #555; /*dark grey*/
+}
+
+
+.item:hover .fa-angle-down {
+    transform: rotate(180deg);
+}
+
+
+.fa-angle-down {
+    transition: transform .3s;
+}
+
+
+.item > a {
+    display: block;
+    color: #fff;
+    padding: 15px 35px;
+    text-decoration: none;
+}
+
+
+.submenu {
+    position: absolute;
+    top: 99%;
+    display: none;
+    width: 210px;
+    background: #37bc9b;
+}
+
+
+.submenu a {
+    color: #fff;
+    display: block;
+    padding: 15px 35px;
+    text-decoration: none;
+    background: #555;
+    float: none;
+}
+
+.submenu a:hover {
+    background: #666;
+}
+
+
+.users, .engines {
+    width: 170px;
+}
+
+
+.login {
+    background: #37bc9b;
+    float: right;
+}
+
+.home {
+    background: #37bc9b;
+}
+
+
+.home a {
+    padding: 18px 20px;
+}
+
+
+/************** END MENU ****************/
+
+
+
+/************** PRELOADER ****************/
+
+
+#main {
+    opacity: 0;
+    margin-top: 60px;
+    transition: all 2.5s;
+}
+
+
+#loading {
+    position: fixed;
+    z-index: 200;
+    top: 50%; left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    user-select: none;
+    text-align: center;
+    font-family: Georgia;
+    font-size: 34px;
+    font-weight: bold;
+}
+
+
+.hide_loading {
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s;
+}
+
+
+/************** END PRELOADER ****************/
+
+
+/************** SCROLLBAR ****************/
+
+/*полоса прокрутки*/
+::-webkit-scrollbar {
+    width: 18px;
+    background-color: #f9f9fd;
+}
+
+/*сам ползунок*/
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    border: 5px solid  #f9f9fd;
+    background: #606060;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background: #909090;
+}
+
+/************** END SCROLLBAR ****************/
+
+
+/****************** BODY ********************/
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+button {
+    cursor: pointer;
+}
+
+/**************** END BODY ******************/
+
+.buttons {
+    position: relative;
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
+    //background-color: yellow;
+    top: 40px;
+}
+
+
+
+</style>
+
+</head>
+
+
+
+
+<script>
+
+window.onload = function() {
+    document.getElementById("main").style="opacity: 1;";
+    $('#loading').addClass('hide_loading');
+}
+
+</script>
+
+
+
+
+<body>
+
+<div id="loading">
+    <i class="fa fa-spinner fa-pulse fa-3x fa-fw" style="font-size: 150px;"></i>
+    <span style="margin-top: 20px;">Loading...</span>
+</div>
+
+
+
+
+<div class="menu">
+    <div class="item home"><a href="javascript:void(0)"><i class='fa fa-home'></i></a></div>
+    <div class="item"><a href="#">About</a></div>
+    <div class="item" id="item_motors"><a href="#">Motors &nbsp;<i class='fa fa-angle-down anim'></i></a>
+        <div class="submenu engines">
+            <a href="#" id="addMotor">Add Motor</a>
+            <a href="#" id="deleteMotor">Delete Motor</a>
+        </div>
+    </div>
+
+    <div class="item" id="item_tools"><a href="#">Tools &nbsp;<i class='fa fa-angle-down anim'></i></a>
+        <div class="submenu">
+            <a href="#" id="addTool">Add Tool</a>
+            <a href="#">Delete Tool</a>
+            <a href="#" id="setCritical">Set Critical Values</a>
+        </div>
+    </div>
+
+    <div class="item" id="item_users"><a href="#">Users &nbsp;<i class='fa fa-angle-down anim'></i></a>
+        <div class="submenu users">
+            <a href="#">Add User</a>
+            <a href="#">Delete User</a>
+        </div>
+    </div>
+    <div class="item login"><a href="#"><i class="fa fa-user-circle-o"></i>&nbsp; Log In</a></div>
+</div>
+
+
+
+
+
+
+<div class="modal" id="modal_test">
+    <div class="modal-content">
+        <div class="up">
+            <div class="up_image up_image_login"></div>
+            <div class="up_text">WEBSOCKET TEST</div>
+            <div class="close_form"><i class="fal fa-times-circle"></i></div>
+        </div>
+
+        <div class="down">
+            <form id="form_login">
+                <label>Send
+                    <input type="text" id="send" autocomplete="off">
+                </label>
+                <label>Receive
+                    <input type="text" id="receive"   autocomplete="off">
+                </label>
+                <div class="buttons">
+                    <button class="button_form" id="button_connect" type="button">Connect</button>
+                    <button class="button_form" id="button_send" type="button">Send</button>
+                    <button class="button_form" id="button_disconnect" type="button">Disconnect</button>
+                    <button class="button_form" id="button_getdata" type="button">Get Data</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div id="main"></div>
+
+
+</body>
+
+
+<script>
+    var stompClient = null;
+    var socket = null;
+
+
+    function connect(event) {
+        socket = new SockJS('http://localhost/ws');
+        stompClient = Stomp.over(socket);
+        stompClient.connect({}, onConnected, onError);
+    }
+
+
+
+    function onConnected() {
+        stompClient.subscribe('/topic/public', onMessageReceived);        // Subscribe to the Public Topic
+        //stompClient.debug = null;                                       // Disable console messages
+        stompClient.send("/app/send", {},  "Hello world");                // Tell username to the server
+
+        //stompClient.send("/app/send", {},  JSON.stringify({name: "Acc", value: 25.7}));
+    }
+
+
+    function onMessageReceived(payload) {
+        //var message = JSON.parse(payload.body);
+        var message = payload.body;
+        $('#receive').val(message);
+    }
+
+
+     function disconnect() {
+        stompClient.disconnect();
+        stompClient = null;
+        socket = null;
+        $('#receive').val("Client disconnected");
+    }
+
+
+    function sendMessage(event) {
+        var value = $('#send').val();
+        if(value) {
+            stompClient.send("/app/send", {}, value);
+        } else {
+            alert('Enter message');
+        }
+    }
+
+
+    function onError(error) {
+        //stompClient.disconnect();
+        stompClient = null;
+        socket = null;
+        $('#receive').val('Could not connect to WebSocket server.');
+    }
+
+
+
+    $("#button_connect").click(function(){                                                      // BUTTON CONNECT
+        if(!stompClient){
+            connect();
+        } else {
+            alert('You are already connected');
+        }
+        event.preventDefault();
+    });
+
+
+    $("#button_send").click(function(){                                                           // BUTTON SEND
+        sendMessage();
+        event.preventDefault();
+    });
+
+
+    $("#button_disconnect").click(function(){                                                // BUTTON DISCONNECT
+        disconnect();
+        event.preventDefault();
+    });
+
+
+
+   $("#button_getdata").click(function(){
+          $.ajax({
+               url: 'http://localhost/getdata',
+               method: 'post',
+               dataType: 'json',
+               contentType: "application/json",
+               data: JSON.stringify({ number : 77 }),
+               //data: {number : 77},
+               success: function(result){
+                     $('#receive').val(result.data);
+               }
+          });
+   });
+
+
+
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+
+</html>
